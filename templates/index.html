@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="WhereTo">
+  <title>WhereTo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Product+Sans">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <link rel="stylesheet" href="/static/main.css?h=bkmxg">
+</head>
+<body>
+  <div id="mapid"></div>
+  <div id="cards">
+    <div id="radius" class="card">
+      <h1 id="radiusText">Radius 300km</h1>
+      <input type="range" id="radiusSlider" min="100" max="1200" value="300" step="50" oninput="updateRadius(this.value)" onchange="getWeather()">
+    </div>
+    <div id="city1" class="card">
+      <h2 id="city1Title"></h2>
+      <div class="icon">
+        <img id="city1Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city1Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city1Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city2" class="card">
+      <h2 id="city2Title"></h2>
+      <div class="icon">
+        <img id="city2Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city2Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city2Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city3" class="card">
+      <h2 id="city3Title"></h2>
+      <div class="icon">
+        <img id="city3Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city3Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city3Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city4" class="card">
+      <h2 id="city4Title"></h2>
+      <div class="icon">
+        <img id="city4Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city4Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city4Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city5" class="card">
+      <h2 id="city5Title"></h2>
+      <div class="icon">
+        <img id="city5Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city5Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city5Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city6" class="card">
+      <h2 id="city6Title"></h2>
+      <div class="icon">
+        <img id="city6Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city6Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city6Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city7" class="card">
+      <h2 id="city7Title"></h2>
+      <div class="icon">
+        <img id="city7Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city7Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city7Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city8" class="card">
+      <h2 id="city8Title"></h2>
+      <div class="icon">
+        <img id="city8Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city8Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city8Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city9" class="card">
+      <h2 id="city9Title"></h2>
+      <div class="icon">
+        <img id="city9Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city9Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city9Date8Info"></figcaption>
+      </div>
+    </div>
+    <div id="city10" class="card">
+      <h2 id="city10Title"></h2>
+      <div class="icon">
+        <img id="city10Date1Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date1Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date2Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date2Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date3Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date3Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date4Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date4Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date5Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date5Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date6Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date6Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date7Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date7Info"></figcaption>
+      </div>
+      <div class="icon">
+        <img id="city10Date8Icon" src="/static/images/50d.png"/>
+        <figcaption id="city10Date8Info"></figcaption>
+      </div>
+    </div>
+  </div>
+  <script src="/static/main.js?h=bkmxg"></script>
+</body>
+</html>
