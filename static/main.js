@@ -138,22 +138,28 @@ function clearCards() {
     }
 }
 
-function showCard(card) {
-    document.getElementById(card).style["opacity"] = "0.9";
+function cardOpacity(card, opacity) {
+    document.getElementById(card).style["opacity"] = opacity;
 }
 
-function hideCard(card) {
-    document.getElementById(card).style["opacity"] = "0.2";
-}
-
-function cascadeCards(show) {
-    if (show) {
-        for (let i = 1; i <= 10; i++) {
-            setTimeout(function () { showCard("city" + i.toString()); }, 100 + (i * 40));
+function cascadeCards(yes) {
+    for (let i = 1; i <= 10; i++) {
+        if (yes) {
+            setTimeout(function () { cardOpacity("city" + i.toString(), "0.9"); }, 100 + (i * 40));
+        } else {
+            setTimeout(function () { cardOpacity("city" + i.toString(), "0.2"); }, 100 + (i * 40));
         }
-    } else {
-        for (let i = 1; i <= 10; i++) {
-            setTimeout(function () { hideCard("city" + i.toString()); }, 100 + (i * 40));
+    }
+}
+
+function hoverCards(yes) {
+    for (let i = 1; i <= 10; i++) {
+        let card = "city" + i.toString();
+        let currentOpacity = document.getElementById(card).style["opacity"];
+        if (yes && currentOpacity == "0.9") {
+            cardOpacity(card, "1");
+        } else if (!yes && currentOpacity == "1") {
+            cardOpacity(card, "0.9");
         }
     }
 }
@@ -177,6 +183,8 @@ function onMapClick(e) {
 }
 
 mymap.on('click', onMapClick);
+document.getElementById("cards").addEventListener("mouseover", (e) => { hoverCards(true) }, false);
+document.getElementById("cards").addEventListener("mouseout", (e) => { hoverCards(false) }, false);
 
 highlightPoint(lastLatLng);
 getWeather();
