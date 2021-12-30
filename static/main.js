@@ -53,6 +53,9 @@ async function getWeather() {
         if (response["error"] != undefined) {
             throw response["error"];
         }
+        if (response["detail"] != undefined) {
+            throw response["detail"];
+        }
         clearCards();
         fillCards(response);
 

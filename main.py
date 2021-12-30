@@ -53,7 +53,7 @@ async def api_weather(request: Request, lat: float, lon: float, radius: int):
 
     closest_cities = utils.closest_by_pop(cities, lat, lon, radius)
     if len(closest_cities) == 0:
-        raise HTTPException(404, detail="No cities found within radius")
+        raise HTTPException(404, detail="No cities >50k population found within radius")
 
     cities_weather = {}
     fetch_cities = []
