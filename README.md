@@ -39,7 +39,6 @@ gcloud beta run deploy whereto --image gcr.io/$(PROJECT)/whereto:latest \
   --region your-region \
   --platform managed \
   --allow-unauthenticated \
-  --concurrency 30 \
   --timeout 30 \
   --memory 512Mi \
   --set-env-vars=OPENWEATHERMAP_API_KEY=your-openweathermap-api-key
